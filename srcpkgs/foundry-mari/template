@@ -1,0 +1,39 @@
+# Template file for 'foundry-mari'
+pkgname="foundry-mari"
+version="4.7"
+revision="4"
+archs="x86_64" 
+depends="xbps-triggers"
+hostmakedepends="tar"
+short_desc="Mari® is 3D painting without limits, combining the power and performance to handle even the most complex assets with artist-friendly 3D paint tools, that make the most of your creativity."
+maintainer="Sergey Ragulev <sergei_ragulev@mail.ru>"
+license="custom"
+homepage="https://www.foundry.com"
+repository="nonfree"
+create_wrksrc=yes
+distfiles="https://thefoundry.s3.amazonaws.com/products/mari/releases/4.7v4/Mari4.7v4-linux-x86-release-64.run"
+checksum="f59669a89a506168abb96dc3c71dc4e51270307c588b38a7dc0a1a31bd415434"
+nopie=yes
+python_version=2
+triggers=""
+
+do_extract() {
+    install -m755 ${XBPS_SRCDISTDIR}/foundry-mari-4.7/Mari4.7v4-linux-x86-release-64.run ${wrksrc}
+    install -m644 ${FILESDIR}/foundry-mari.desktop ${wrksrc}
+    cd ${wrksrc}
+    mkdir ${wrksrc}/foundry-mari-4.7v4
+    ./Mari4.7v4-linux-x86-release-64.run --accept-eula --prefix=${wrksrc}/foundry-mari-4.7v4
+}
+
+post_install() {
+    cd ${wrksrc}
+    
+    vmkdir usr/share/applications
+    vinstall foundry-mari.desktop 644 usr/share/applications
+}
+
+do_install() {
+    cd ${wrksrc}
+
+    vcopy foundry-mari-4.7v4 opt/
+}
