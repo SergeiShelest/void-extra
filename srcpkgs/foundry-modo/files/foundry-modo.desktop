@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Foundry Modo
+Exec=/opt/foundry-modo-15.1v2/modo
+Icon=/opt/foundry-modo-15.1v2/resrc/icons/icon_256x256.png
+Terminal=false
+Type=Application
+Categories=Graphics;3DGraphics;

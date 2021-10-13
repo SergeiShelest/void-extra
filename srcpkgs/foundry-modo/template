@@ -1,0 +1,48 @@
+# Template file for 'foundry-modo'
+pkgname="foundry-modo"
+version="15.1"
+revision="2"
+archs="x86_64"
+depends="xbps-triggers libidn-v1.11"
+makedepends="tar"
+short_desc="Modo’s powerful and flexible 3D modeling, animation, texturing and rendering toolset empowers artists to explore and develop ideas without jumping through technical hoops. Modo® is your starting point for creative exploration."
+maintainer="Sergey Ragulev <sergei_ragulev@mail.ru>"
+license="custom"
+homepage="https://www.foundry.com"
+repository="nonfree"
+create_wrksrc=yes
+distfiles="https://thefoundry.s3.amazonaws.com/products/modo/15.1v2/Modo15.1v2_Linux.run"
+checksum="bf1143cb9e7fa7239f1a2d7a0535e834b66310fb61a195c438da6e4e54242a04"
+nopie=yes
+python_version=3
+noverifyrdeps=yes
+nostrip=yes
+
+
+do_extract() {
+    install -m755 ${XBPS_SRCDISTDIR}/foundry-modo-15.1/Modo15.1v2_Linux.run ${wrksrc}
+    install -m644 ${FILESDIR}/foundry-modo.desktop ${wrksrc}
+    
+    if [ ! -d /usr/local/foundry ]; then
+        mkdir /usr/local/foundry
+    fi
+    
+    if [ ! -d /usr/local/foundry/RLM ]; then
+        mkdir /usr/local/foundry/RLM
+    fi
+
+    
+    mkdir ${wrksrc}/foundry-modo-15.1v2
+
+    ./Modo15.1v2_Linux.run --accept-eula --target ${wrksrc}/foundry-modo-15.1v2
+}
+
+post_install() {
+    vmkdir usr/share/applications
+    vinstall ${wrksrc}/foundry-modo.desktop 644 usr/share/applications
+}
+
+do_install() {
+    vmkdir opt/foundry-modo-15.1v2
+    vcopy ${wrksrc}/foundry-modo-15.1v2/* opt/foundry-modo-15.1v2
+}
