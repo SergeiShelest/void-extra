@@ -1,0 +1,37 @@
+# Template file for 'libidn-v1.11'
+pkgname="libidn-v1.11"
+version="1.11"
+revision="1"
+maintainer="Sergey Ragulev <sergei_ragulev@mail.ru>"
+archs="x86_64" 
+depends="glibc"
+hostmakedepends="tar"
+short_desc="Implementation of the Stringprep, Punycode and IDNA specifications"
+license="GPL3"
+homepage="http://www.gnu.org/software/libidn/"
+create_wrksrc=yes
+distfiles="http://ftp.gnu.org/gnu/libidn/libidn-1.11.tar.gz"
+checksum="25ba5927c304f470d43ccfe53004646382767b3b06e559ff1ca0b1bdff5295d6"
+shlib_provides="libidn.so.11.5.40 libidn.so.11"
+
+
+do_extract() {
+    tar -xf ${XBPS_SRCDISTDIR}/libidn-v1.11-1.11/libidn-1.11.tar.gz -C ${wrksrc}
+}
+
+do_configure() {
+    cd ${wrksrc}/libidn-1.11
+    ./configure --prefix=/usr
+}
+
+do_build() {
+    cd ${wrksrc}/libidn-1.11
+    make DESTDIR=${wrksrc} install
+}
+
+do_install() {
+    cd ${wrksrc}/usr/lib
+
+    vinstall libidn.so.11.5.40 755 usr/lib/
+    ln -sf libidn.so.11.5.40 ${DESTDIR}/usr/lib/libidn.so.11
+}
