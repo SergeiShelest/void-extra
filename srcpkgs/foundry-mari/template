@@ -16,7 +16,7 @@ checksum="f59669a89a506168abb96dc3c71dc4e51270307c588b38a7dc0a1a31bd415434"
 nopie=yes
 python_version=2
 noverifyrdeps=yes
-
+nostrip=yes
 
 do_extract() {
     install -m755 ${XBPS_SRCDISTDIR}/foundry-mari-4.7/Mari4.7v4-linux-x86-release-64.run ${wrksrc}
