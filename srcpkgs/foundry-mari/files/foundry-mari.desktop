@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Foundry Mari
-Exec=/opt/bin/Mari4.7v4
-Icon=/opt/Media/Icons/Mari.png
+Exec=/opt/foundry-mari-4.7v4/bin/Mari4.7v4
+Icon=/opt/foundry-mari-4.7v4/Media/Icons/Mari.png
 Terminal=false
 Type=Application
 Categories=Graphics;3DGraphics;
